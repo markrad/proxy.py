@@ -194,6 +194,11 @@ class HttpProxyPlugin(HttpProtocolHandlerPlugin):
                     'SSLWantWriteError while trying to flush to server, will retry',
                 )
                 return False
+            except ssl.SSLWantReadError:
+                logger.warning(
+                    'SSLWantReadError while trying to flush to server, will retry',
+                )
+                return False
             except BrokenPipeError:
                 logger.warning(
                     'BrokenPipeError when flushing buffer for server',
